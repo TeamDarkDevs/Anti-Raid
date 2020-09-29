@@ -1,0 +1,25 @@
+{
+  "name": "antiraid",
+  "author": "darkboy",
+  "version": "0.0.1",
+  "description": "Discord Anti Raid Bot.",
+  "main": "raid.js",
+  "scripts": {
+    "start": "nodemon raid.js"
+  },
+  "dependencies": {
+    "discord.js": "^12.3.1",
+    "fs": "0.0.1-security",
+    "js-yaml": "^3.14.0",
+    "ms": "^2.1.2",
+    "parse-ms": "^2.1.0",
+    "path": "^0.12.7",
+    "quick.db": "^7.1.1"
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
