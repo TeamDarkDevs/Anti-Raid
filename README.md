@@ -1,4 +1,4 @@
-<h1 align="center">Anit-Raid</h1>
+<h1 align="center">Anti-Raid</h1>
 
 ## 📝 Starting Up
 - npm i
