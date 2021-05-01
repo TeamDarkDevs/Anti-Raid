@@ -1,15 +1,16 @@
 console.log("\nLoading...")
 console.log("If This Take Too long make sure u have add right token!")
+require('dotenv').config()
 const fs = require('fs')
 const yaml = require("js-yaml");
-const { mainprefix , token } = yaml.load(fs.readFileSync("./config.yml"));
+const { mainprefix } = yaml.load(fs.readFileSync("./config.yml"));
 const Discord = require('discord.js')
 const client = new Discord.Client();
 const db = require('quick.db')
 const { join } = require('path');
 const { readdirSync } = require('fs');
 client.commands= new Discord.Collection();
-client.login(token)
+client.login(process.env.TOKEN);
 
   
 client.on('ready', () => {

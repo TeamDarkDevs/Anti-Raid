@@ -13,13 +13,13 @@ module.exports = {
         .setAuthor(message.author.tag,message.author.displayAvatarURL())
         .setDescription(`
         ** Available Keys**
-   > **config setrolecreatelimt
+   > **config setrolecreatelimit
    > conifg setactionlogs
-   > config setroledeletelimt
-   > config setchannelcreatelimt
-   > config setchanneldeletelimt
-   > config setbanlimts
-   > config setkicklimts
+   > config setroledeletelimit
+   > config setchannelcreatelimit
+   > config setchanneldeletelimit
+   > config setbanlimits
+   > config setkicklimits
   > config clearuser
    > config show**     
    `)
@@ -27,42 +27,42 @@ module.exports = {
   return message.channel.send(embed);
 }
  if(cmd.toLowerCase() === 'show') {
-   let rolelimt = db.get(`rolecreatelimt_${message.guild.id}`) 
-   if(rolelimt === null) rolelimt = "Disabled :x:"
-   let roledelete = db.get(`roledeletelimts_${message.guild.id}`) 
+   let rolelimit = db.get(`rolecreatelimit_${message.guild.id}`) 
+   if(rolelimit === null) rolelimit = "Disabled :x:"
+   let roledelete = db.get(`roledeletelimits_${message.guild.id}`) 
    if(roledelete === null) roledelete = "Disabled :x:"
    let logschannel = db.get(`acitonslogs_${message.guild.id}`)
    let logschannel2 = db.get(`acitonslogs_${message.guild.id}`)
    if(logschannel === null) logschannel = "Disabled :x:"
    else logschannel = `<#${logschannel2}>`
-   let channelcreatelimts = db.get(`channelcreatelimts_${message.guild.id}`)
-   if(channelcreatelimts === null) channelcreatelimts = "Disabled :x:"
-   let channeldeletelimts = db.get(`channeldeletelimts_${message.guild.id}`)
-   if(channeldeletelimts === null) channeldeletelimts = "Disabled :x:"
-   let banlimts = db.get(`banlimts_${message.guild.id}`)
-  if(banlimts === null) banlimts = "Disabled :x:"
-  let kicklimts = db.get(`kicklimts_${message.guild.id}`)
-  if(kicklimts === null) kicklimts = "Disabled :x:"
+   let channelcreatelimits = db.get(`channelcreatelimits_${message.guild.id}`)
+   if(channelcreatelimits === null) channelcreatelimits = "Disabled :x:"
+   let channeldeletelimits = db.get(`channeldeletelimits_${message.guild.id}`)
+   if(channeldeletelimits === null) channeldeletelimits = "Disabled :x:"
+   let banlimits = db.get(`banlimits_${message.guild.id}`)
+  if(banlimits === null) banlimits = "Disabled :x:"
+  let kicklimits = db.get(`kicklimits_${message.guild.id}`)
+  if(kicklimits === null) kicklimits = "Disabled :x:"
 
    let showembed = new Discord.MessageEmbed()
 
    .setAuthor(message.author.username, message.author.displayAvatarURL())
-   .addField('Role Create Limts', rolelimt, true)
-   .addField('Role Delete Limts', roledelete, true)
+   .addField('Role Create limits', rolelimit, true)
+   .addField('Role Delete limits', roledelete, true)
    .addField(`Aciton Logs Channel`, logschannel, true)
-   .addField(`Channel Create Limts`, channelcreatelimts, true)
-   .addField(`Channel Delete Limts`, channeldeletelimts, true)
-   .addField(`Ban Limts`, banlimts, true)
-   .addField(`Kick Limts`, kicklimts, true)
+   .addField(`Channel Create limits`, channelcreatelimits, true)
+   .addField(`Channel Delete limits`, channeldeletelimits, true)
+   .addField(`Ban limits`, banlimits, true)
+   .addField(`Kick limits`, kicklimits, true)
     .setFooter(message.guild.name, guildicon)
     return message.channel.send(showembed);
  }
- if(cmd.toLowerCase() === 'setrolecreatelimt') {
+ if(cmd.toLowerCase() === 'setrolecreatelimit') {
 let rolecreate = args.slice(1).join(" ");
 if(!rolecreate) {
  let missing = new Discord.MessageEmbed()
  .setAuthor(message.author.username, message.author.displayAvatarURL())
- .setDescription(`** an invaild usage**\nconfig setrolecreatelimt (number)`)
+ .setDescription(`** an invaild usage**\nconfig setrolecreatelimit (number)`)
  .setFooter(message.guild.name, guildicon)
 
   return message.channel.send(missing);
@@ -70,23 +70,23 @@ if(!rolecreate) {
 if(isNaN(rolecreate)) {
   let missing = new Discord.MessageEmbed()
   .setAuthor(message.author.username, message.author.displayAvatarURL())
-  .setDescription(`** an invaild usage (Cannot be words only numbers)**\nconfig setrolecreatelimt (number)`)
+  .setDescription(`** an invaild usage (Cannot be words only numbers)**\nconfig setrolecreatelimit (number)`)
   .setFooter(message.guild.name, guildicon)
 return message.channel.send(missing);
 }
-db.set(`rolecreatelimt_${message.guild.id}`, rolecreate)
+db.set(`rolecreatelimit_${message.guild.id}`, rolecreate)
 let done = new Discord.MessageEmbed() 
 .setAuthor(message.author.username, message.author.displayAvatarURL())
-.setDescription(`Done SetRoleCreation Limts Has Been Set To ${rolecreate} ✅`)
+.setDescription(`Done SetRoleCreation limits Has Been Set To ${rolecreate} ✅`)
 .setFooter(message.guild.name, guildicon)
 return message.channel.send(done);
 }
-if(cmd.toLowerCase() === 'setroledeletelimt') {
+if(cmd.toLowerCase() === 'setroledeletelimit') {
   let roledelete = args.slice(1).join(" ");
   if(!roledelete) {
    let missing = new Discord.MessageEmbed()
    .setAuthor(message.author.username, message.author.displayAvatarURL())
-   .setDescription(`** an invaild usage**\nconfig setroledeletelimt (number)`)
+   .setDescription(`** an invaild usage**\nconfig setroledeletelimit (number)`)
    .setFooter(message.guild.name, guildicon)
   
     return message.channel.send(missing);
@@ -94,14 +94,14 @@ if(cmd.toLowerCase() === 'setroledeletelimt') {
   if(isNaN(rolecreate)) {
     let missing = new Discord.MessageEmbed()
     .setAuthor(message.author.username, message.author.displayAvatarURL())
-    .setDescription(`** an invaild usage (Cannot be words only numbers)**\nconfig setroledeletelimt (number)`)
+    .setDescription(`** an invaild usage (Cannot be words only numbers)**\nconfig setroledeletelimit (number)`)
     .setFooter(message.guild.name, guildicon)
   return message.channel.send(missing);
   }
-  db.set(`roledeletelimts_${message.guild.id}`, rolecreate)
+  db.set(`roledeletelimits_${message.guild.id}`, rolecreate)
   let done = new Discord.MessageEmbed() 
   .setAuthor(message.author.username, message.author.displayAvatarURL())
-  .setDescription(`Done SetRoleDelete Limts Has Been Set To ${rolecreate} ✅`)
+  .setDescription(`Done SetRoleDelete limits Has Been Set To ${rolecreate} ✅`)
   .setFooter(message.guild.name, guildicon)
   return message.channel.send(done);
   
@@ -123,12 +123,12 @@ let done = new Discord.MessageEmbed()
 .setFooter(message.guild.name, guildicon)
 return message.channel.send(done)
 }
-if(cmd.toLowerCase() === 'setchannelcreatelimt') {
+if(cmd.toLowerCase() === 'setchannelcreatelimit') {
   let rolecreate = args.slice(1).join(" ");
   if(!rolecreate) {
    let missing = new Discord.MessageEmbed()
    .setAuthor(message.author.username, message.author.displayAvatarURL())
-   .setDescription(`** an invaild usage**\nconfig setchannelcreatelimt (number)`)
+   .setDescription(`** an invaild usage**\nconfig setchannelcreatelimit (number)`)
    .setFooter(message.guild.name, guildicon)
   
     return message.channel.send(missing);
@@ -136,23 +136,23 @@ if(cmd.toLowerCase() === 'setchannelcreatelimt') {
   if(isNaN(rolecreate)) {
     let missing = new Discord.MessageEmbed()
     .setAuthor(message.author.username, message.author.displayAvatarURL())
-    .setDescription(`** an invaild usage (Cannot be words only numbers)**\nconfig setchannelcreatelimt (number)`)
+    .setDescription(`** an invaild usage (Cannot be words only numbers)**\nconfig setchannelcreatelimit (number)`)
     .setFooter(message.guild.name, guildicon)
   return message.channel.send(missing);
   }
-  db.set(`channelcreatelimts_${message.guild.id}`, rolecreate)
+  db.set(`channelcreatelimits_${message.guild.id}`, rolecreate)
   let done = new Discord.MessageEmbed() 
   .setAuthor(message.author.username, message.author.displayAvatarURL())
-  .setDescription(`Done Channel Create Limts Has Been Set To ${rolecreate} ✅`)
+  .setDescription(`Done Channel Create limits Has Been Set To ${rolecreate} ✅`)
   .setFooter(message.guild.name, guildicon)
   return message.channel.send(done);
 }
-if(cmd.toLowerCase() === 'setchanneldeletelimt') {
+if(cmd.toLowerCase() === 'setchanneldeletelimit') {
   let rolecreate = args.slice(1).join(" ");
   if(!rolecreate) {
    let missing = new Discord.MessageEmbed()
    .setAuthor(message.author.username, message.author.displayAvatarURL())
-   .setDescription(`** an invaild usage**\nconfig setchanneldeletelimt (number)`)
+   .setDescription(`** an invaild usage**\nconfig setchanneldeletelimit (number)`)
    .setFooter(message.guild.name, guildicon)
   
     return message.channel.send(missing);
@@ -160,23 +160,23 @@ if(cmd.toLowerCase() === 'setchanneldeletelimt') {
   if(isNaN(rolecreate)) {
     let missing = new Discord.MessageEmbed()
     .setAuthor(message.author.username, message.author.displayAvatarURL())
-    .setDescription(`** an invaild usage (Cannot be words only numbers)**\nconfig setchanneldeletelimt (number)`)
+    .setDescription(`** an invaild usage (Cannot be words only numbers)**\nconfig setchanneldeletelimit (number)`)
     .setFooter(message.guild.name, guildicon)
   return message.channel.send(missing);
   }
-  db.set(`channeldeletelimts_${message.guild.id}`, rolecreate)
+  db.set(`channeldeletelimits_${message.guild.id}`, rolecreate)
   let done = new Discord.MessageEmbed() 
   .setAuthor(message.author.username, message.author.displayAvatarURL())
-  .setDescription(`Done Channel Delete Limts Has Been Set To ${rolecreate} ✅`)
+  .setDescription(`Done Channel Delete limits Has Been Set To ${rolecreate} ✅`)
   .setFooter(message.guild.name, guildicon)
   return message.channel.send(done);
 }
-if(cmd.toLowerCase() === 'setbanlimts') {
+if(cmd.toLowerCase() === 'setbanlimits') {
   let rolecreate = args.slice(1).join(" ");
   if(!rolecreate) {
    let missing = new Discord.MessageEmbed()
    .setAuthor(message.author.username, message.author.displayAvatarURL())
-   .setDescription(`** an invaild usage**\nconfig setbanlimt (number)`)
+   .setDescription(`** an invaild usage**\nconfig setbanlimit (number)`)
    .setFooter(message.guild.name, guildicon)
   
     return message.channel.send(missing);
@@ -184,23 +184,23 @@ if(cmd.toLowerCase() === 'setbanlimts') {
   if(isNaN(rolecreate)) {
     let missing = new Discord.MessageEmbed()
     .setAuthor(message.author.username, message.author.displayAvatarURL())
-    .setDescription(`** an invaild usage (Cannot be words only numbers)**\nconfig setbanlimt (number)`)
+    .setDescription(`** an invaild usage (Cannot be words only numbers)**\nconfig setbanlimit (number)`)
     .setFooter(message.guild.name, guildicon)
   return message.channel.send(missing);
   }
-  db.set(`banlimts_${message.guild.id}`, rolecreate)
+  db.set(`banlimits_${message.guild.id}`, rolecreate)
   let done = new Discord.MessageEmbed() 
   .setAuthor(message.author.username, message.author.displayAvatarURL())
-  .setDescription(`Done Channel Ban Limts Has Been Set To ${rolecreate} ✅`)
+  .setDescription(`Done Channel Ban limits Has Been Set To ${rolecreate} ✅`)
   .setFooter(message.guild.name, guildicon)
   return message.channel.send(done);
 }
-if(cmd.toLowerCase() === 'setkicklimnts') {
+if(cmd.toLowerCase() === 'setkicklimits') {
   let rolecreate = args.slice(1).join(" ");
   if(!rolecreate) {
    let missing = new Discord.MessageEmbed()
    .setAuthor(message.author.username, message.author.displayAvatarURL())
-   .setDescription(`** an invaild usage**\nconfig setbanlimt (number)`)
+   .setDescription(`** an invaild usage**\nconfig setbanlimit (number)`)
    .setFooter(message.guild.name, guildicon)
   
     return message.channel.send(missing);
@@ -208,14 +208,14 @@ if(cmd.toLowerCase() === 'setkicklimnts') {
   if(isNaN(rolecreate)) {
     let missing = new Discord.MessageEmbed()
     .setAuthor(message.author.username, message.author.displayAvatarURL())
-    .setDescription(`** an invaild usage (Cannot be words only numbers)**\nconfig setkicklimt (number)`)
+    .setDescription(`** an invaild usage (Cannot be words only numbers)**\nconfig setkicklimits (number)`)
     .setFooter(message.guild.name, guildicon)
   return message.channel.send(missing);
   }
-  db.set(`kicklimts_${message.guild.id}`, rolecreate)
+  db.set(`kicklimits_${message.guild.id}`, rolecreate)
   let done = new Discord.MessageEmbed() 
   .setAuthor(message.author.username, message.author.displayAvatarURL())
-  .setDescription(`Done Channel Kick Limts Has Been Set To ${rolecreate} ✅`)
+  .setDescription(`Done Channel Kick limits Has Been Set To ${rolecreate} ✅`)
   .setFooter(message.guild.name, guildicon)
   return message.channel.send(done);
 }
@@ -224,13 +224,13 @@ if(cmd.toLowerCase() === 'clearuser') {
 if(!user) {
   return message.channel.send(`** Mention User **`);
 }
-db.delete(`executer_${message.guild.id}_${user.id}_kicklimts`) 
-db.delete(`executer_${message.guild.id}_${user.id}_banlimts`)
+db.delete(`executer_${message.guild.id}_${user.id}_kicklimits`) 
+db.delete(`executer_${message.guild.id}_${user.id}_banlimits`)
 db.delete(`executer_${message.guild.id}_${user.id}_rolecreate`)
 db.delete(`executer_${message.guild.id}_${user.id}_roledelete`)
 db.delete(`executer_${message.guild.id}_${user.id}_channelcreate`)
 db.delete(`executer_${message.guild.id}_${user.id}_channeldelete`)
-return message.channel.send(`Reseted User Limts`);
+return message.channel.send(`Reseted User limits`);
 }
 }}
  
